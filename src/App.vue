@@ -2,7 +2,7 @@
 import { ref } from "vue";
 let count = 0;
 let status = 0;
-const quesiton = ref("転職度診断");
+const quesiton = ref("あなたの転職したい度を診断します");
 const result = ref("");
 const selectBtn = ref(false);
 const startBtn = ref(true);
@@ -38,7 +38,7 @@ const nextQestion = (answer) => {
   if (count == questionBox.length) {
     quesiton.value = "終了です";
     const safePercent = (status / questionBox.length) * 100;
-    result.value = "あなたの安心したい度は" + safePercent + "%です。";
+    result.value = "あなたの転職したい度は" + safePercent + "%です。";
     retryBtn.value = !retryBtn.value;
     selectBtn.value = !selectBtn.value;
   } else {
@@ -49,6 +49,7 @@ const nextQestion = (answer) => {
 
 <template>
   <div>
+    <h1>転職度診断</h1>
     <p>{{ quesiton }}</p>
     <p>{{ result }}</p>
     <div v-show="startBtn">
