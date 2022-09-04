@@ -2,57 +2,212 @@
 import { ref } from "vue";
 import backImg from "./assets/top.jpg";
 
-let count = 0;
-let status = 0;
-const quesiton = ref("あなたの転職したい度を診断します");
-const result = ref("");
+// 変数へ初期値を代入
+const questionBox = [
+  "あなたの天職を診断します",
+  "好きな色は?",
+  "好きなのは?",
+  "どちらの作業が得意?",
+  "休日行くとしたら?",
+  "リーダーのような役職は?",
+  "もし結婚するとしたら?",
+  "絵を描くのは得意な方だ",
+  "展示会など人に見られる仕事が好き",
+  "つい部屋の模様替えをしてしまう",
+  "服のセンスはあると思う",
+  "休みの日は?",
+  "プレゼンで人を説得するのが得意",
+  "服装にはこだわりがある",
+  "PCを使う作業は得意",
+  "人と話すのが好き",
+  "物作りが好き",
+];
+const yesBox = [
+  "始める",
+  "明るい色",
+  "大勢でいる方",
+  "コツコツ細かい作業",
+  "山",
+  "好き",
+  "スタイルの良い俳優",
+  "はい",
+  "はい",
+  "はい",
+  "はい",
+  "外で過ごす",
+  "はい",
+  "はい",
+  "はい",
+  "はい",
+  "はい",
+];
+const noBox = [
+  "",
+  "落ち着いた色",
+  "少人数でいる方",
+  "大きな決断をする作業",
+  "海",
+  "苦手",
+  "知的な医学関係者",
+  "いいえ",
+  "いいえ",
+  "いいえ",
+  "いいえ",
+  "部屋で過ごす",
+  "いいえ",
+  "いいえ",
+  "いいえ",
+  "いいえ",
+  "いいえ",
+];
+const resultBox = [
+  "",
+  "体育会系",
+  "操作系",
+  "コミュニケーション系",
+  "センス系",
+];
+let questionNumber = 0;
+const quesitonContent = ref(questionBox[0]);
+const yesSelect = ref(yesBox[0]);
+const noSelect = ref("");
+const resultContent = ref("");
 const selectBtn = ref(false);
 const startBtn = ref(true);
 const retryBtn = ref(false);
 
-const questionBox = [
-  "毎日定時に帰れる仕事がしたい",
-  "尊敬できる上司の下で働きたい",
-  "手当や福利厚生が充実している会社で働きたい",
-  "転勤のない仕事がしたい",
-];
 // スタートボタンを押した時の動作
 const startDiagnosis = () => {
-  count = 0;
-  status = 0;
+  questionNumber = 1;
   startBtn.value = !startBtn.value;
   selectBtn.value = !selectBtn.value;
-  quesiton.value = questionBox[count];
+  quesitonContent.value = questionBox[questionNumber];
+  yesSelect.value = yesBox[questionNumber];
+  noSelect.value = noBox[questionNumber];
 };
 
 // リトライボタンを押した時の操作
 const retryDiagnosis = () => {
-  quesiton.value = "あなたの転職したい度を診断します";
-  result.value = "";
+  quesitonContent.value = questionBox[0];
+  resultContent.value = "";
   startBtn.value = !startBtn.value;
   retryBtn.value = !retryBtn.value;
 };
 
-// はいかいいえを押した時の操作
-const nextQestion = (answer) => {
-  if (answer == "Yes") {
-    status++;
-  }
-
-  count++;
-  if (count == questionBox.length) {
-    quesiton.value = "お疲れ様でした！";
-    const safePercent = (status / questionBox.length) * 100;
-    result.value = "あなたの転職したい度は" + safePercent + "%です。";
-    retryBtn.value = !retryBtn.value;
-    selectBtn.value = !selectBtn.value;
-  } else {
-    quesiton.value = questionBox[count];
-  }
+// 結果を表示する
+const resultDiagnosis = (resultNumber) => {
+  quesitonContent.value = "あなたの向いている職業は";
+  resultContent.value = resultBox[resultNumber];
+  selectBtn.value = !selectBtn.value;
+  retryBtn.value = !retryBtn.value;
 };
-const test2 = () => {
-  console.log("ttt");
-  document.getElementById("test").src = backImg;
+
+// はいかいいえを押した時の操作
+const nextQestion = (selectAnswer) => {
+  if (questionNumber == 1) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 2;
+    } else {
+      questionNumber = 4;
+    }
+  } else if (questionNumber == 2) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 3;
+    } else {
+      questionNumber = 5;
+    }
+  } else if (questionNumber == 3) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 5;
+    } else {
+      questionNumber = 6;
+    }
+  } else if (questionNumber == 4) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 7;
+    } else {
+      questionNumber = 5;
+    }
+  } else if (questionNumber == 5) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 8;
+    } else {
+      questionNumber = 7;
+    }
+  } else if (questionNumber == 6) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 9;
+    } else {
+      questionNumber = 8;
+    }
+  } else if (questionNumber == 7) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 10;
+    } else {
+      questionNumber = 11;
+    }
+  } else if (questionNumber == 8) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 11;
+    } else {
+      questionNumber = 7;
+    }
+  } else if (questionNumber == 9) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 12;
+    } else {
+      questionNumber = 8;
+    }
+  } else if (questionNumber == 10) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 15;
+    } else {
+      questionNumber = 14;
+    }
+  } else if (questionNumber == 11) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 15;
+    } else {
+      questionNumber = 16;
+    }
+  } else if (questionNumber == 12) {
+    if (selectAnswer == "Yes") {
+      questionNumber = 15;
+    } else {
+      questionNumber = 16;
+    }
+  } else if (questionNumber == 13) {
+    if (selectAnswer == "Yes") {
+      resultDiagnosis(1);
+      return;
+    } else {
+      questionNumber = 16;
+    }
+  } else if (questionNumber == 14) {
+    if (selectAnswer == "Yes") {
+      resultDiagnosis(2);
+      return;
+    } else {
+      questionNumber = 13;
+    }
+  } else if (questionNumber == 15) {
+    if (selectAnswer == "Yes") {
+      resultDiagnosis(3);
+      return;
+    } else {
+      questionNumber = 14;
+    }
+  } else {
+    if (selectAnswer == "Yes") {
+      resultDiagnosis(4);
+      return;
+    } else {
+      questionNumber = 13;
+    }
+  }
+  quesitonContent.value = questionBox[questionNumber];
+  yesSelect.value = yesBox[questionNumber];
+  noSelect.value = noBox[questionNumber];
 };
 </script>
 
@@ -60,15 +215,19 @@ const test2 = () => {
   <div class="mainbox">
     <h1>転職度診断</h1>
     <div class="quesitonbox">
-      <p>{{ quesiton }}</p>
-      <p>{{ result }}</p>
+      <p>{{ quesitonContent }}</p>
+      <p>{{ resultContent }}</p>
     </div>
     <div v-show="startBtn">
       <button class="btn blue" @click="startDiagnosis">スタート</button>
     </div>
     <div v-show="selectBtn">
-      <button class="btn whiteblue" @click="nextQestion('Yes')">はい</button>
-      <button class="btn red" @click="nextQestion('No')">いいえ</button>
+      <button class="btn whiteblue" @click="nextQestion('Yes')">
+        {{ yesSelect }}
+      </button>
+      <button class="btn red" @click="nextQestion('No')">
+        {{ noSelect }}
+      </button>
     </div>
     <div v-show="retryBtn">
       <p>あなたの転職イメージ</p>
