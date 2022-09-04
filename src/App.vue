@@ -1,6 +1,10 @@
 <script setup>
 import { ref } from "vue";
-import backImg from "./assets/top.jpg";
+import accountantImg from "./assets/accountant.jpg";
+import actorImg from "./assets/actor.jpg";
+import engineerImg from "./assets/engineer.jpg";
+import salesImg from "./assets/sales.jpg";
+import trainerImg from "./assets/trainer.jpg";
 
 // 変数へ初期値を代入
 const questionBox = [
@@ -62,10 +66,11 @@ const noBox = [
 ];
 const resultBox = [
   "",
-  "体育会系",
-  "操作系",
-  "コミュニケーション系",
-  "センス系",
+  "演技系",
+  "事務・経理系",
+  "営業系",
+  "エンジニア系",
+  "体力系",
 ];
 let questionNumber = 0;
 const quesitonContent = ref(questionBox[0]);
@@ -75,6 +80,11 @@ const resultContent = ref("");
 const selectBtn = ref(false);
 const startBtn = ref(true);
 const retryBtn = ref(false);
+const trainerShow = ref(false);
+const salesShow = ref(false);
+const engineerShow = ref(false);
+const actorShow = ref(false);
+const accountantShow = ref(false);
 
 // スタートボタンを押した時の動作
 const startDiagnosis = () => {
@@ -92,6 +102,11 @@ const retryDiagnosis = () => {
   resultContent.value = "";
   startBtn.value = !startBtn.value;
   retryBtn.value = !retryBtn.value;
+  trainerShow.value = false;
+  salesShow.value = false;
+  engineerShow.value = false;
+  actorShow.value = false;
+  accountantShow.value = false;
 };
 
 // 結果を表示する
@@ -100,6 +115,17 @@ const resultDiagnosis = (resultNumber) => {
   resultContent.value = resultBox[resultNumber];
   selectBtn.value = !selectBtn.value;
   retryBtn.value = !retryBtn.value;
+  if (resultNumber == 1) {
+    actorShow.value = !actorShow.value;
+  } else if (resultNumber == 2) {
+    accountantShow.value = !accountantShow.value;
+  } else if (resultNumber == 3) {
+    salesShow.value = !salesShow.value;
+  } else if (resultNumber == 4) {
+    engineerShow.value = !engineerShow.value;
+  } else {
+    trainerShow.value = !trainerShow.value;
+  }
 };
 
 // はいかいいえを押した時の操作
@@ -181,7 +207,7 @@ const nextQestion = (selectAnswer) => {
       resultDiagnosis(1);
       return;
     } else {
-      questionNumber = 16;
+      resultDiagnosis(5);
     }
   } else if (questionNumber == 14) {
     if (selectAnswer == "Yes") {
@@ -231,7 +257,45 @@ const nextQestion = (selectAnswer) => {
     </div>
     <div v-show="retryBtn">
       <p>あなたの転職イメージ</p>
-      <img :src="backImg" alt="転職イメージ画像" class="resultimg" />
+      <div v-show="accountantShow">
+        <img :src="accountantImg" alt="会計士画像" class="resultimg" />
+        <a class="weblink" href="https://cpa.mynavi.jp/"
+          >転職にチャレンジしてみる</a
+        >
+      </div>
+      <div v-show="actorShow">
+        <img
+          v-show="engineerShow"
+          :src="engineerImg"
+          alt="エンジニア画像"
+          class="resultimg"
+        />
+        <a class="weblink" href="https://doda.jp/engineer/"
+          >転職にチャレンジしてみる</a
+        >
+      </div>
+      <div v-show="actorShow">
+        <img :src="actorImg" alt="俳優画像" class="resultimg" /><a
+          class="weblink"
+          href="https://www.audition-com.net/l/agency-top/"
+          >転職にチャレンジしてみる</a
+        >
+      </div>
+
+      <div v-show="salesShow">
+        <img :src="salesImg" alt="営業画像" class="resultimg" /><a
+          class="weblink"
+          href="https://tenshoku.mynavi.jp/selectjob-11/"
+          >転職にチャレンジしてみる</a
+        >
+      </div>
+
+      <div v-show="trainerShow">
+        <img :src="trainerImg" alt="トレーナー画像" class="resultimg" />
+        <a class="weblink" href="https://tenshoku.mynavi.jp/list/o1F220/"
+          >転職にチャレンジしてみる</a
+        >
+      </div>
       <button class="btn red" @click="retryDiagnosis">リトライ</button>
     </div>
   </div>
@@ -296,5 +360,8 @@ const nextQestion = (selectAnswer) => {
 .resultimg {
   margin: 0 auto;
   width: 50%;
+}
+.weblink {
+  font-size: 24px;
 }
 </style>
