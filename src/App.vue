@@ -5,6 +5,7 @@ import actorImg from "./assets/actor.jpg";
 import engineerImg from "./assets/engineer.jpg";
 import salesImg from "./assets/sales.jpg";
 import trainerImg from "./assets/trainer.jpg";
+import topImg from "./assets/top.jpg";
 
 // 変数へ初期値を代入
 const questionBox = [
@@ -238,10 +239,15 @@ const nextQestion = (selectAnswer) => {
 </script>
 
 <template>
+  <header>
+    <div class="">
+      <img :src="topImg" alt="トップ画像" class="topimg" />
+    </div>
+  </header>
   <div class="container-fluid">
     <div class="mainbox row">
       <div class="col-12">
-        <h1 class="">転職度診断</h1>
+        <h1>転職度診断</h1>
         <div class="quesitonbox">
           <p>{{ quesitonContent }}</p>
           <p>{{ resultContent }}</p>
@@ -297,11 +303,10 @@ const nextQestion = (selectAnswer) => {
       </div>
     </div>
   </div>
+  <footer class="footer mt-5 bg-light">転職応援クラブ</footer>
 </template>
 
 <style scoped>
-@import "assets/css/reset.css";
-
 .mainbox {
   width: 80%;
   margin: 0 auto;
@@ -329,8 +334,9 @@ const nextQestion = (selectAnswer) => {
 }
 .btn {
   padding: 10px 30px;
-  margin: 10px 30px;
+  margin: 10px 0;
   font-size: 20px;
+  width: 80%;
 }
 .blue {
   background-color: aqua;
@@ -347,5 +353,9 @@ const nextQestion = (selectAnswer) => {
 }
 .weblink {
   font-size: 24px;
+}
+.topimg {
+  margin: 20px auto;
+  height: 100px;
 }
 </style>
