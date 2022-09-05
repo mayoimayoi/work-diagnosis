@@ -238,60 +238,63 @@ const nextQestion = (selectAnswer) => {
 </script>
 
 <template>
-  <div class="mainbox">
-    <h1>転職度診断</h1>
-    <div class="quesitonbox">
-      <p>{{ quesitonContent }}</p>
-      <p>{{ resultContent }}</p>
-    </div>
-    <div v-show="startBtn">
-      <button class="btn blue" @click="startDiagnosis">スタート</button>
-    </div>
-    <div v-show="selectBtn">
-      <button class="btn whiteblue" @click="nextQestion('Yes')">
-        {{ yesSelect }}
-      </button>
-      <button class="btn red" @click="nextQestion('No')">
-        {{ noSelect }}
-      </button>
-    </div>
-    <div v-show="retryBtn">
-      <p>あなたの転職イメージ</p>
-      <div v-show="accountantShow">
-        <img :src="accountantImg" alt="会計士画像" class="resultimg" />
-        <a class="weblink" href="https://cpa.mynavi.jp/"
-          >転職にチャレンジしてみる</a
-        >
-      </div>
-      <div v-show="engineerShow">
-        <img :src="engineerImg" alt="エンジニア画像" class="resultimg" />
-        <a class="weblink" href="https://doda.jp/engineer/"
-          >転職にチャレンジしてみる</a
-        >
-      </div>
-      <div v-show="actorShow">
-        <img :src="actorImg" alt="俳優画像" class="resultimg" /><a
-          class="weblink"
-          href="https://www.audition-com.net/l/agency-top/"
-          >転職にチャレンジしてみる</a
-        >
-      </div>
+  <div class="container-fluid">
+    <div class="mainbox row">
+      <div class="col-12">
+        <h1 class="">転職度診断</h1>
+        <div class="quesitonbox">
+          <p>{{ quesitonContent }}</p>
+          <p>{{ resultContent }}</p>
+        </div>
+        <div v-show="startBtn">
+          <button class="btn blue" @click="startDiagnosis">スタート</button>
+        </div>
+        <div v-show="selectBtn">
+          <button class="btn whiteblue" @click="nextQestion('Yes')">
+            {{ yesSelect }}
+          </button>
+          <button class="btn red" @click="nextQestion('No')">
+            {{ noSelect }}
+          </button>
+        </div>
+        <div v-show="retryBtn">
+          <p>あなたの転職イメージ</p>
+          <div v-show="accountantShow">
+            <img :src="accountantImg" alt="会計士画像" class="resultimg" />
+            <a class="weblink" href="https://cpa.mynavi.jp/"
+              >転職にチャレンジしてみる</a
+            >
+          </div>
+          <div v-show="engineerShow">
+            <img :src="engineerImg" alt="エンジニア画像" class="resultimg" />
+            <a class="weblink" href="https://doda.jp/engineer/"
+              >転職にチャレンジしてみる</a
+            >
+          </div>
+          <div v-show="actorShow">
+            <img :src="actorImg" alt="俳優画像" class="resultimg" /><a
+              class="weblink"
+              href="https://www.audition-com.net/l/agency-top/"
+              >転職にチャレンジしてみる</a
+            >
+          </div>
 
-      <div v-show="salesShow">
-        <img :src="salesImg" alt="営業画像" class="resultimg" /><a
-          class="weblink"
-          href="https://tenshoku.mynavi.jp/selectjob-11/"
-          >転職にチャレンジしてみる</a
-        >
+          <div v-show="salesShow">
+            <img :src="salesImg" alt="営業画像" class="resultimg" /><a
+              class="weblink"
+              href="https://tenshoku.mynavi.jp/selectjob-11/"
+              >転職にチャレンジしてみる</a
+            >
+          </div>
+          <div v-show="trainerShow">
+            <img :src="trainerImg" alt="トレーナー画像" class="resultimg" />
+            <a class="weblink" href="https://tenshoku.mynavi.jp/list/o1F220/"
+              >転職にチャレンジしてみる</a
+            >
+          </div>
+          <button class="btn red" @click="retryDiagnosis">リトライ</button>
+        </div>
       </div>
-
-      <div v-show="trainerShow">
-        <img :src="trainerImg" alt="トレーナー画像" class="resultimg" />
-        <a class="weblink" href="https://tenshoku.mynavi.jp/list/o1F220/"
-          >転職にチャレンジしてみる</a
-        >
-      </div>
-      <button class="btn red" @click="retryDiagnosis">リトライ</button>
     </div>
   </div>
 </template>
@@ -303,8 +306,8 @@ const nextQestion = (selectAnswer) => {
   width: 80%;
   margin: 0 auto;
   padding: 20px 30px;
-  background: #ffffee;
-  box-shadow: 0px 0px 0px 10px #ffffbb;
+  background: #f1ffe0;
+  box-shadow: 0px 0px 0px 10px #e2e8cc;
   border: dashed 2px white;
 }
 .mainbox p {
@@ -312,36 +315,22 @@ const nextQestion = (selectAnswer) => {
   padding: 0;
 }
 .quesitonbox {
+  padding: 20px 30px;
   margin: 2em 0;
-  position: relative;
-  padding: 20px 10px;
-  border: solid 2px #ffcb8a;
-  border-radius: 3px 0 3px 0;
-}
-.quesitonbox:before,
-.quesitonbox:after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  border: solid 2px #ffcb8a;
-  border-radius: 50%;
-}
-.quesitonbox:after {
-  top: -12px;
-  left: -12px;
-}
-.quesitonbox:before {
-  bottom: -12px;
-  right: -12px;
+  background: #ffffee;
+  box-shadow: 0px 0px 0px 5px #ffe00f;
+  border: dashed 3px yellow;
+  border-radius: 10px;
 }
 .quesitonbox p {
   margin: 0;
   padding: 0;
+  font-size: 24px;
 }
 .btn {
   padding: 10px 30px;
   margin: 10px 30px;
+  font-size: 20px;
 }
 .blue {
   background-color: aqua;
