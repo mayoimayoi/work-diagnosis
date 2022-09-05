@@ -263,13 +263,8 @@ const nextQestion = (selectAnswer) => {
           >転職にチャレンジしてみる</a
         >
       </div>
-      <div v-show="actorShow">
-        <img
-          v-show="engineerShow"
-          :src="engineerImg"
-          alt="エンジニア画像"
-          class="resultimg"
-        />
+      <div v-show="engineerShow">
+        <img :src="engineerImg" alt="エンジニア画像" class="resultimg" />
         <a class="weblink" href="https://doda.jp/engineer/"
           >転職にチャレンジしてみる</a
         >
