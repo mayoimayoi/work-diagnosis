@@ -248,9 +248,9 @@ const nextQestion = (selectAnswer) => {
     <div class="mainbox row">
       <div class="col-12">
         <h1>転職度診断</h1>
-        <div class="quesitonbox">
+        <div class="quesitonbox flexbox">
           <p>{{ quesitonContent }}</p>
-          <p>{{ resultContent }}</p>
+          <p class="resulttext">{{ resultContent }}</p>
         </div>
         <div v-show="startBtn">
           <button class="btn blue" @click="startDiagnosis">スタート</button>
@@ -307,8 +307,14 @@ const nextQestion = (selectAnswer) => {
 </template>
 
 <style scoped>
+.flexbox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .mainbox {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   padding: 20px 30px;
   background: #f1ffe0;
@@ -320,17 +326,18 @@ const nextQestion = (selectAnswer) => {
   padding: 0;
 }
 .quesitonbox {
+  height: 200px;
   padding: 20px 30px;
   margin: 2em 0;
   background: #ffffee;
   box-shadow: 0px 0px 0px 5px #ffe00f;
   border: dashed 3px yellow;
   border-radius: 10px;
+  font-size: 24px;
 }
 .quesitonbox p {
   margin: 0;
   padding: 0;
-  font-size: 24px;
 }
 .btn {
   padding: 10px 30px;
@@ -357,5 +364,10 @@ const nextQestion = (selectAnswer) => {
 .topimg {
   margin: 20px auto;
   height: 100px;
+}
+.resulttext {
+  font-size: 36px;
+  color: red;
+  font-weight: bold;
 }
 </style>
