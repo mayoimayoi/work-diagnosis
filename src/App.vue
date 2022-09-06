@@ -87,9 +87,16 @@ const engineerShow = ref(false);
 const actorShow = ref(false);
 const accountantShow = ref(false);
 
+// 初めの問題を１〜３でランダムにするための関数
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+}
+
 // スタートボタンを押した時の動作
 const startDiagnosis = () => {
-  questionNumber = 1;
+  questionNumber = getRandomInt(1, 4);
   startBtn.value = !startBtn.value;
   selectBtn.value = !selectBtn.value;
   quesitonContent.value = questionBox[questionNumber];
